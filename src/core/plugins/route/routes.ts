@@ -13,6 +13,5 @@ export async function generateRoutes(api: NodeJS.ViteReactAutoConfigServer) {
       importNameTemplate,
       loadingComponent: api.userConfig.dynamicImport?.loading,
     }),
-    // isPrettier: true,
   });
 }

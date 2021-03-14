@@ -21,7 +21,6 @@ const writeTypesFile = async (api: NodeJS.ViteReactAutoConfigServer) => {
       initReactI18nextPath: api.resolveConfigAliasNamePath(filePath),
       default: api.userConfig.locale?.default || defaultLocale,
     }),
-    // isPrettier: true,
   });
 };
 
@@ -48,7 +47,6 @@ const writeFile = async (api: NodeJS.ViteReactAutoConfigServer, species: LocaleS
       resources,
       default: localConfig?.default,
     }),
-    // isPrettier: true,
   });
 
   return species;

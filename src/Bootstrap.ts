@@ -48,26 +48,8 @@ export class Bootstrap {
     this.server.logger.stopAndPersistOk('初始化 plugins 完成');
   }
 
-  /**
-   * 暂时无法清除已经 import 的 file cache, 先临时绕过
-   *
-   * @see https://github.com/nodejs/modules/issues/307
-   */
-  // private async getBuildOutputTemporaryConfigFilePathAndRemoveTheLast() {
-  //   await fs.remove(this.cacheConfigTemporaryFilePath.replace(/\/config_\d+\.js/, ''));
-
-  //   this.cacheConfigTemporaryFilePath = this.cacheConfigTemporaryFilePath.replace(
-  //     /(?<=config__)(\d+)(?=\.js$)/,
-  //     `${new Date().valueOf()}`,
-  //   );
-
-  //   return this.cacheConfigTemporaryFilePath;
-  // }
-
   private getConfig() {
     assert(fs.existsSync(this.userConfigFilePath), '请在根目录上创建配置文件');
-
-    // const configTemporaryFilePath = await this.getBuildOutputTemporaryConfigFilePathAndRemoveTheLast();
 
     const configTemporaryFilePath = this.server.resolveTmpPath(`config.js`);
 
@@ -83,8 +65,6 @@ export class Bootstrap {
     delete require.cache[require.resolve(configTemporaryFilePath)];
 
     // 读取配置文件
-    // return import(configTemporaryFilePath).then((res) => res.default);
-
     // eslint-disable-next-line global-require
     return require(configTemporaryFilePath).default;
   }
@@ -94,9 +74,6 @@ export class Bootstrap {
 
     this.userConfigPath = join(cwd, 'config');
     this.userConfigFilePath = join(this.userConfigPath, `index.ts`);
-    // this.cacheConfigTemporaryFilePath = this.server.resolveTmpPath(
-    //   `config__${new Date().valueOf()}.js`,
-    // );
 
     const userConfig = this.getConfig();
 

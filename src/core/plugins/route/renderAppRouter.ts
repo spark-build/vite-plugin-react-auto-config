@@ -5,6 +5,5 @@ export async function generateRenderAppRouter(api: NodeJS.ViteReactAutoConfigSer
   return api.generateFile.writeFile({
     path: filePath,
     content: api.generateFile.renderTpl(api.generateFile.readTplFile(__dirname, tpl), {}),
-    // isPrettier: true,
   });
 }
