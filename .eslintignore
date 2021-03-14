@@ -1,0 +1,6 @@
+dist/
+node_modules/
+test/
+.eslintrc.js
+.prettierrc.js
+.stylelintrc.js
