@@ -1,6 +1,6 @@
 {
   "name": "@spark-build/vite-plugin-react-auto-config",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "类似 umi 自动生成路由以及相关库集成配置的 vite 插件",
   "author": "atzcl0310@gmail.com",
   "license": "MIT",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@loadable/component": "^5.14.1",
     "@spark-build/web-utils": "^0.0.7",
-    "antd": "^4.13.1",
+    "antd": "^4.14.0",
     "i18next": "^19.9.2",
     "lodash": "^4.17.21",
     "p-min-delay": "^3.2.0",
@@ -28,7 +28,7 @@
     "react-router-dom": "^6.0.0-beta.0"
   },
   "devDependencies": {
-    "@spark-build/lint": "^0.0.14",
+    "@spark-build/lint": "^0.0.15",
     "@types/fs-extra": "^9.0.8",
     "@types/loadable__component": "^5.13.3",
     "@types/lodash": "^4.14.168",
@@ -47,7 +47,7 @@
     "tapable": "^2.2.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3",
-    "vite": "^2.0.5",
+    "vite": "^2.1.0",
     "less": "4.1.1",
     "vite-plugin-style-import": "^0.8.1"
   },
