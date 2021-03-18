@@ -11,12 +11,13 @@ export const loadPlugins = async () => {
   return Promise.all(
     files.map(async (id) => {
       const path = join(pluginsDirPath, id);
-      const loadFileSetting = await import(path).then((res) => ({
-        stage: res.stage || 0,
-        fn: res.default,
-      }));
 
       try {
+        const loadFileSetting = await import(path).then((res) => ({
+          stage: res.stage || 0,
+          fn: res.default,
+        }));
+
         /**
          * 使用 tapable 来 load plugin
          * stage 默认是 0，设为 -1 或更少会提前执行，设为 1 或更多会后置执行
