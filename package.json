@@ -26,6 +26,7 @@
     "father-build": "^1.19.2",
     "fs-extra": "^9.1.0",
     "globby": "^11.0.2",
+    "history": "^5.0.0",
     "i18next": "^19.9.2",
     "lodash": "^4.17.21",
     "mustache": "^4.1.0",
