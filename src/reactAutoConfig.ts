@@ -8,10 +8,19 @@ export const reactAutoConfigPluginConfig = (bootstrap: Bootstrap): Plugin => {
 
     config: () => ({
       resolve: {
-        alias: {
-          '@': bootstrap.getServer().paths.absSrcPath,
-          [bootstrap.getServer().configPathAliasName]: bootstrap.getServer().paths.absTmpPath,
-        },
+        alias: [
+          /**
+           * support less ’~‘ alias
+           *
+           * @see https://github.com/vitejs/vite/issues/2185#issuecomment-784637827
+           */
+          { find: /^~/, replacement: '' },
+          { find: /^@\//, replacement: `${bootstrap.getServer().paths.absSrcPath}/` },
+          {
+            find: new RegExp(`^${bootstrap.getServer().configPathAliasName}/`),
+            replacement: `${bootstrap.getServer().paths.absTmpPath}/`,
+          },
+        ],
       },
       css: {
         preprocessorOptions: {
