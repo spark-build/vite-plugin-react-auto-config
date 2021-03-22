@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import { existsSync, readFileSync, outputFile, remove } from 'fs-extra';
+import { existsSync, readFileSync, outputFile, remove, copy } from 'fs-extra';
 
 import * as Mustache from 'mustache';
 
@@ -17,6 +17,10 @@ export class GenerateFile {
     this.generateFileQueue.push(opt);
 
     return this;
+  }
+
+  copyFile(src: string, dest: string) {
+    return copy(src, dest);
   }
 
   readTplFile(...filePath: string[]) {

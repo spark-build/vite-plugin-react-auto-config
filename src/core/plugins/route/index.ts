@@ -1,9 +1,13 @@
 // import { generateDynamic } from './generateFiles/dynamic';
+import { join } from 'path';
+
 import { generateRoutes } from './routes';
 import {
   generateRenderAppRouter,
   filePath as generateRenderAppRouterFilePath,
 } from './renderAppRouter';
+
+const dTsFilePath = '@types/index.d.ts';
 
 export default async function generateRouter(api: NodeJS.ViteReactAutoConfigServer) {
   api.addDepsEntryExports(() => ({ source: 'react-router-dom' }));
@@ -36,5 +40,10 @@ function renderRouter(children?: React.ReactElement) {
     await generateRoutes(api);
 
     await generateRenderAppRouter(api);
+
+    await api.generateFile.copyFile(
+      join(__dirname, '../../typings/common.d.ts'),
+      api.resolveTmpPath(dTsFilePath),
+    );
   });
 }

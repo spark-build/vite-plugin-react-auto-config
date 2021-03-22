@@ -7,7 +7,7 @@ import type { RouteItem } from '../@types';
 import { getRoutes } from './routes';
 
 type TRouteItem = Omit<RouteItem, 'component'> & {
-  component: LoadableComponent<{ children?: React.ReactNode }>;
+  component: LoadableComponent<Record<string, unknown>>;
   routes?: TRouteItem[];
 };
 
