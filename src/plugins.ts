@@ -1,23 +1,34 @@
-import styleImport from 'vite-plugin-style-import';
+import type { Options as reactRefreshOptions } from '@vitejs/plugin-react-refresh';
 import reactRefresh from '@vitejs/plugin-react-refresh';
+
+import type { VitePluginComponentImport } from 'vite-plugin-style-import';
+import styleImportPlugin from 'vite-plugin-style-import';
 
 import { reactAutoConfigPluginConfig } from './reactAutoConfig';
 import { Bootstrap } from './Bootstrap';
 
 const bootstrap = new Bootstrap();
 
-export const reactAutoConfig = () => {
+type Options = {
+  styleImport?: VitePluginComponentImport;
+  reactRefresh?: reactRefreshOptions;
+};
+
+export const reactAutoConfig = (options: Options = {}) => {
   const { userConfig } = bootstrap.getServer();
 
   const plugins = [reactAutoConfigPluginConfig(bootstrap)];
 
   if (userConfig.fastRefresh !== false) {
-    plugins.push(reactRefresh());
+    plugins.push(reactRefresh(options.reactRefresh));
   }
 
   if (userConfig.antd) {
+    const { styleImport } = options;
+
     plugins.push(
-      styleImport({
+      styleImportPlugin({
+        ...(styleImport || {}),
         libs: [
           {
             libraryName: 'antd',
@@ -26,6 +37,7 @@ export const reactAutoConfig = () => {
               return `antd/es/${name}/style/index`;
             },
           },
+          ...(styleImport?.libs || []),
         ],
       }),
     );
