@@ -3,7 +3,6 @@
 跟 umi 一样的按照约定配置，自动生成路由以及相关库集成配置的 vite 插件
 
 ## Support
-
 - [x] 基于 [react-router-dom@6.0.0-beta.0](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh#readme) 实现的路由系统
   - [x] 配置式路由
   - [ ] 约定式路由
@@ -15,6 +14,7 @@
 - [x] 类似 umi 的运行时配置（未实现全部功能）
 - [x] 内置配置了 `@` 映射到 `project/src` 的路径别名
 - [x] 跟 umi 类似的插件系统
+- [x] 检测配置文件变化，自动应用配置变更进行编译
 
 ## Installation
 
