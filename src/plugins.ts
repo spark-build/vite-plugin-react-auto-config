@@ -37,6 +37,11 @@ export const reactAutoConfig = (options: Options = {}) => {
               return `antd/es/${name}/style/index`;
             },
           },
+          {
+            libraryName: '@ant-design/icons',
+            libraryNameChangeCase: 'pascalCase',
+            resolveComponent: (name) => `@ant-design/icons/es/icons/${name}`,
+          },
           ...(styleImport?.libs || []),
         ],
       }),
