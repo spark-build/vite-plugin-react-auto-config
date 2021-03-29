@@ -19,7 +19,7 @@
 ## Installation
 
 ```bash
-yarn add vite-plugin-react-auto-config
+yarn add @spark-build/vite-plugin-react-auto-config
 ```
 
 ## Usage
