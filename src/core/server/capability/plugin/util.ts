@@ -1,3 +1,4 @@
+/* eslint-disable import/no-dynamic-require */
 import { join } from 'path';
 
 import * as fs from 'fs-extra';
@@ -13,7 +14,22 @@ export const loadPlugins = async () => {
       const path = join(pluginsDirPath, id);
 
       try {
-        const loadFileSetting = await import(path).then((res) => ({
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        const loadFileSetting = await new Promise<{ stage?: number; default: Function }>(
+          (resolve, reject) => {
+            try {
+              /**
+               * fix
+               *  warning: This call to "require" will not be bundled because the argument is not a string literal
+               * (surround with a try/catch to silence this warning)
+               */
+              // eslint-disable-next-line global-require
+              resolve(require(path));
+            } catch (error) {
+              reject(error);
+            }
+          },
+        ).then((res) => ({
           stage: res.stage || 0,
           fn: res.default,
         }));

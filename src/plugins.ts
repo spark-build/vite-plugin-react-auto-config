@@ -33,9 +33,7 @@ export const reactAutoConfig = (options: Options = {}) => {
           {
             libraryName: 'antd',
             esModule: true,
-            resolveStyle: (name) => {
-              return `antd/es/${name}/style/index`;
-            },
+            resolveStyle: (name) => `antd/es/${name}/style/index`,
           },
           {
             libraryName: '@ant-design/icons',
