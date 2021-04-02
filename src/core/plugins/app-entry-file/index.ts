@@ -25,10 +25,16 @@ declare global {
 export const stage = -9;
 
 function addStrictModeRender(api: NodeJS.ViteReactAutoConfigServer) {
-  api.addImportToAppEntryFile(() => ({ specifier: '{ StrictMode }', source: 'react' }));
+  const isSkip = () => api.userConfig.strictMode !== true;
+
+  api.addImportToAppEntryFile({
+    isSkip,
+    fn: () => ({ specifier: '{ StrictMode }', source: 'react' }),
+  });
 
   api.addContainerRenderToAppEntryFile({
     stage: 998,
+    isSkip,
     fn: () => `
 function renderStrictMode(children?: React.ReactElement) {
   return <StrictMode>{children}</StrictMode>;
@@ -62,6 +68,7 @@ export default async function AppEntryFile(api: NodeJS.ViteReactAutoConfigServer
     });
   });
 
+  console.log('addStrictModeRender', 'addRootContainer');
   addStrictModeRender(api);
   addRootContainer(api);
 
