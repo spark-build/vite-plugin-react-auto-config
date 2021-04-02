@@ -1,11 +1,9 @@
-export type Hook = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  fn: Function;
+import type { TapableHookObject } from '../../typings';
+
+export type Hook<T extends any = any> = {
   key: string;
   pluginId?: string;
-  before?: string;
-  stage?: number;
-};
+} & TapableHookObject<T>;
 
 export class Hooks {
   private hooks: Map<string, Hook[]> = new Map();

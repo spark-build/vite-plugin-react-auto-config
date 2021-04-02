@@ -67,6 +67,7 @@ export type TapableHookObject<T extends any> = {
   before?: string;
   stage?: number;
   fn?: (args: T) => any;
+  isSkip?: () => boolean;
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

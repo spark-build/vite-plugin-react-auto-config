@@ -98,17 +98,11 @@ export class Service extends ResolvePath {
     return [this.configPathAliasName, ...p].join('/');
   }
 
-  private forEachHooks(key: string, cb: (hook: Hook) => any, skipCheckPluginEnableStatus = false) {
+  private forEachHooks(key: string, cb: (hook: Hook) => any) {
     const hooks = this.hooks.find(key);
 
     for (const hook of hooks) {
-      // 现在是用配置来跳过某些 hook 的插件启用判断，后面可以改成：
-      // 在插件初始化时，将需要在插件禁用时，需要进行的某些操作挂载到某一处去统一处理
-      if (
-        !skipCheckPluginEnableStatus &&
-        hook.pluginId &&
-        !this.plugin.enableStatus(hook.pluginId)
-      ) {
+      if ((hook.pluginId && !this.plugin.enableStatus(hook.pluginId)) || hook.isSkip?.()) {
         continue;
       }
 
@@ -123,41 +117,36 @@ export class Service extends ResolvePath {
     initialValue?: T;
     defaultValue?: T[];
     args?: any;
-    skipCheckPluginEnableStatus?: boolean;
   }): Promise<T[]> {
     if (!opts.type || opts.type === ApplyPluginsType.ADD) {
       // 异步串行
       // eslint-disable-next-line no-case-declarations
-      const tEvent = new AsyncSeriesWaterfallHook(['_']);
+      const tAdd = new AsyncSeriesWaterfallHook(['memo']);
 
-      this.forEachHooks(
-        opts.key,
-        (hook) => {
-          tEvent.tapPromise(
-            {
-              name: hook.pluginId || hook.key,
-              stage: hook.stage || 0,
-              before: hook.before,
-            },
-            async (memo) => {
-              const item = await hook.fn(opts.args);
+      this.forEachHooks(opts.key, (hook) => {
+        tAdd.tapPromise(
+          {
+            name: hook.pluginId || hook.key,
+            stage: hook.stage || 0,
+            before: hook.before,
+          },
+          async (memo) => {
+            const item = await hook.fn!(opts.args);
 
-              return item ? (memo as any[]).concat(item) : memo;
-            },
-          );
-        },
-        opts.skipCheckPluginEnableStatus,
-      );
+            return item ? (memo as any[]).concat(item) : memo;
+          },
+        );
+      });
 
-      const result = (await tEvent.promise(opts.initialValue || [])) as T[];
+      const result = (await tAdd.promise(opts.initialValue || [])) as T[];
 
       return !result.length && opts.defaultValue ? opts.defaultValue : result;
     }
 
-    const tAdd = new AsyncSeriesWaterfallHook<any[]>(['memo']);
+    const tEvent = new AsyncSeriesWaterfallHook<any[]>(['_']);
 
     this.forEachHooks(opts.key, (hook) => {
-      tAdd.tapPromise(
+      tEvent.tapPromise(
         {
           name: hook.pluginId || hook.key,
           stage: hook.stage || 0,
@@ -165,14 +154,14 @@ export class Service extends ResolvePath {
         },
         // 累计返回值
         async (memo = []) => {
-          const item = await hook.fn(opts.args);
+          const item = await hook.fn!(opts.args);
 
           return item ? memo.concat([item]) : memo;
         },
       );
     });
 
-    return tAdd.promise(undefined);
+    return tEvent.promise(undefined);
   }
 
   handleReCompile() {
