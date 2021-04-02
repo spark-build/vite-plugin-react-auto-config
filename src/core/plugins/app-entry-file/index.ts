@@ -68,7 +68,6 @@ export default async function AppEntryFile(api: NodeJS.ViteReactAutoConfigServer
     });
   });
 
-  console.log('addStrictModeRender', 'addRootContainer');
   addStrictModeRender(api);
   addRootContainer(api);
 
