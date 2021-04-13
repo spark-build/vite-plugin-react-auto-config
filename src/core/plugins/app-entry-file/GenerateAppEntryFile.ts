@@ -27,14 +27,8 @@ export class GenerateAppEntryFile {
     }
   }
 
-  private static async getContainerRenderFunctionNames(api: NodeJS.ViteReactAutoConfigServer) {
-    const values = await api.applyPlugins({
-      key: registerMethodKeys.addRenderFunctionNameToAppEntryFile,
-    });
-
-    return [
-      ...new Set([...(this.fileContent.match(/(?<=function\s)\S+(?=\s?\()/g) || []), ...values]),
-    ];
+  private static async getContainerRenderFunctionNames() {
+    return [...new Set(this.fileContent.match(/(?<=function\s)\S+(?=\s?\()/g) || [])];
   }
 
   private static result() {
@@ -53,16 +47,11 @@ export class GenerateAppEntryFile {
     });
 
     await this.handleAddFileContentByApplyHook({
-      key: registerMethodKeys.addRenderFunctionNameToAppEntryFile,
-      api,
-    });
-
-    await this.handleAddFileContentByApplyHook({
       key: registerMethodKeys.addContainerRenderToAppEntryFile,
       api,
     });
 
-    const renderFCs = await this.getContainerRenderFunctionNames(api);
+    const renderFCs = await this.getContainerRenderFunctionNames();
 
     this.addSpaceToFileContent(`
 const renderContainers = [${renderFCs.join(', ')}] as (

@@ -32,12 +32,4 @@ export class Format {
     }
    */
   // static [registerMethodKeys.addContainerRenderToAppEntryFile] = (text: string) => text;
-
-  /**
-   * 用于导入的渲染容器方法
-   * api.addRenderFunctionName(`rootContainer`)
-   * ==>
-   * const renderContainers = [rootContainer]
-   */
-  // static [registerMethodKeys.addRenderFunctionNameToAppEntryFile] = (text: string) => text;
 }

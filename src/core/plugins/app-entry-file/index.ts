@@ -16,7 +16,6 @@ declare global {
 
       addImportToAppEntryFile: TapableHookEvent<any, ExportOrImportParams | string>;
       addContainerRenderToAppEntryFile: TapableHookEvent<any, string>;
-      addRenderFunctionNameToAppEntryFile: TapableHookEvent<any, string>;
     }
   }
 }
