@@ -1,8 +1,9 @@
 # vite-plugin-react-auto-config
 
-跟 umi 一样的按照约定配置，自动生成路由以及相关库集成配置的 vite 插件
+依托于 [vite](https://github.com/vitejs/vite) 的插件机制实现的类 [umi](https://github.com/umijs/umi) 的按照约定配置，自动生成路由以及集成的 react 生态库相关配置的脚手架
 
 ## Support
+
 - [x] 基于 [react-router-dom@6.0.0-beta.0](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh#readme) 实现的路由系统
   - [x] 配置式路由
   - [ ] 约定式路由
@@ -24,6 +25,8 @@ yarn add -D @spark-build/vite-plugin-react-auto-config
 
 ## Usage
 
+#### 引入插件
+
 ```typescript
 // vite.config.ts
 
@@ -36,6 +39,8 @@ export default defineConfig({
   // ...
 });
 ```
+
+#### 配置文件
 
 ```typescript
 // config/index.ts  该文件需要自己创建
@@ -80,4 +85,39 @@ export default defineConfig({
   },
   antd: {},
 });
+```
+
+#### 运行时配置
+
+约定 `src/app.{tsx|ts|js|jsx}` 为运行时配置，`app.{css|less|scss}` 为全局样式文件，这两个文件创建后会自动引入
+
+```typescript
+// src/app.tsx
+
+import { UseRequestProvider } from 'ahooks';
+
+/**
+ * 修改交给 react-dom 渲染时的根组件。
+ * 1、比如用于在外面包一个 Provider
+ * 2、比如用于渲染之前做权限校验
+ */
+export const rootContainer = (children?: React.ReactElement) => {
+  return (
+    <UseRequestProvider
+      value={{
+        requestMethod: requestMethod: (param)=> axios(param),
+      }}
+    >
+      {children}
+    </UseRequestProvider>
+  );
+};
+```
+
+```less
+// src/app.less
+
+:root {
+  --primary-color: @primary-color;
+}
 ```
