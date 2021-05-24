@@ -25,6 +25,7 @@ export type Config = {
 
     fallbackLng?: string;
   };
+  windiCSS?: boolean;
   antd?: {
     // 开启暗色主题
     dark?: boolean;

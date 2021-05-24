@@ -8,9 +8,11 @@
   - [x] 配置式路由
   - [ ] 约定式路由
   - [ ] 类似 `vue-router@4` 的路由守卫
+- [x] 内置基于 [vite-react-jsx](https://github.com/alloc/vite-react-jsx) 实现的 React 17.x 后的 `automatic JSX runtime`
 - [x] 基于 [react-i18next](https://github.com/i18next/react-i18next) 实现的国际化（i18n）
 - [x] 基于 [@loadable/component](https://loadable-components.com/docs/getting-started/) 实现路由懒加载、路由代码切割
 - [x] 内置基于 [@vitejs/plugin-react-refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh#readme) 实现的 `react-refresh`, 默认启用，可以通过配置进行关闭
+- [x] 内置 [vite-plugin-windicss](https://github.com/windicss/vite-plugin-windicss), 可以通过配置开启，默认关闭
 - [x] 内置基于 [vite-plugin-style-import](https://github.com/anncwb/vite-plugin-style-import) 实现的 `antd` 等库的按需加载, 默认对 `antd`、`@ant-design/icons` 进行按需加载，可以通过配置进行关闭、拓展
 - [x] 类似 umi 的运行时配置（未实现全部功能）
 - [x] 内置配置了 `@` 映射到 `project/src` 的路径别名
@@ -105,7 +107,7 @@ export const rootContainer = (children?: React.ReactElement) => {
   return (
     <UseRequestProvider
       value={{
-        requestMethod: requestMethod: (param)=> axios(param),
+        requestMethod: (param) => axios(param),
       }}
     >
       {children}

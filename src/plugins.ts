@@ -1,23 +1,36 @@
 import type { Options as reactRefreshOptions } from '@vitejs/plugin-react-refresh';
 import reactRefresh from '@vitejs/plugin-react-refresh';
+import reactJsx from 'vite-react-jsx';
+import WindiCSS from 'vite-plugin-windicss';
 
-import type { VitePluginComponentImport } from 'vite-plugin-style-import';
+// import type { VitePluginComponentImport } from 'vite-plugin-style-import';
 import styleImportPlugin from 'vite-plugin-style-import';
+
+import type { PluginOption } from 'vite';
+
+import type { VitePluginComponentImport } from './temp';
 
 import { reactAutoConfigPluginConfig } from './reactAutoConfig';
 import { Bootstrap } from './Bootstrap';
 
-const bootstrap = new Bootstrap();
-
 type Options = {
+  // @see https://github.com/anncwb/vite-plugin-style-import/issues/19
   styleImport?: VitePluginComponentImport;
   reactRefresh?: reactRefreshOptions;
 };
 
-export const reactAutoConfig = (options: Options = {}) => {
+export const reactAutoConfig = async (options: Options = {}) => {
+  const bootstrap = new Bootstrap();
+
+  // 初始化插件
+  await bootstrap.init();
+
   const { userConfig } = bootstrap.getServer();
 
-  const plugins = [reactAutoConfigPluginConfig(bootstrap)];
+  const plugins = [reactJsx(), reactAutoConfigPluginConfig(bootstrap)] as (
+    | PluginOption
+    | PluginOption[]
+  )[];
 
   if (userConfig.fastRefresh !== false) {
     plugins.push(reactRefresh(options.reactRefresh));
@@ -44,6 +57,10 @@ export const reactAutoConfig = (options: Options = {}) => {
         ],
       }),
     );
+  }
+
+  if (userConfig.windiCSS) {
+    plugins.push(WindiCSS());
   }
 
   return plugins;

@@ -7,7 +7,7 @@ import * as fs from 'fs-extra';
 import { debounce } from 'lodash';
 import * as esbuild from 'esbuild';
 
-import { Service, sleep } from './core';
+import { Service } from './core';
 
 export class Bootstrap {
   private server!: Service;
@@ -24,28 +24,6 @@ export class Bootstrap {
     });
 
     this.init();
-  }
-
-  async checkLoadPluginReady() {
-    if (this.server.plugin.isReady) {
-      return;
-    }
-
-    this.server.logger.awaitText('正在初始化 plugins ...');
-
-    /**
-     * @see https://github.com/vitejs/vite/blob/5ec13d8b3fe1632f793c7ad22b21c43a13d71141/packages/vite/src/node/config.ts#L705
-     *
-     * 因为 vite-plugin-react-auto-config 的 plugins 的加载是异步的
-     * 而 vite 的 plugins 是同步加载的，所以这里就堵塞一下，以使 plugins 能正确加载
-     */
-
-    while (!this.server.plugin.isReady) {
-      // eslint-disable-next-line no-await-in-loop
-      await sleep(160);
-    }
-
-    this.server.logger.stopAndPersistOk('初始化 plugins 完成');
   }
 
   private getConfig() {
