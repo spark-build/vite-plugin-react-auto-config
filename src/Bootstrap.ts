@@ -22,8 +22,6 @@ export class Bootstrap {
         cwd: process.cwd(),
       },
     });
-
-    this.init();
   }
 
   private getConfig() {
