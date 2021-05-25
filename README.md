@@ -35,11 +35,12 @@ yarn add -D @spark-build/vite-plugin-react-auto-config
 import { defineConfig } from 'vite';
 import { reactAutoConfig } from '@spark-build/vite-plugin-react-auto-config';
 
-export default defineConfig({
-  // ...
-  plugins: [...reactAutoConfig()],
-  // ...
-});
+export default async () =>
+  defineConfig({
+    // ...
+    plugins: [...reactAutoConfig()],
+    // ...
+  });
 ```
 
 #### 配置文件
@@ -122,4 +123,10 @@ export const rootContainer = (children?: React.ReactElement) => {
 :root {
   --primary-color: @primary-color;
 }
+```
+
+#### 示例
+
+```bash
+git clone https://github.com/spark-build/vite-plugin-react-auto-config.git && cd vite-plugin-react-auto-config && yarn && yarn build && cd example && yarn && yarn dev
 ```
