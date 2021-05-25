@@ -53,7 +53,7 @@ export class Service extends ResolvePath {
   logger: Logger;
 
   get self() {
-    return (this as unknown) as NodeJS.ViteReactAutoConfigServer;
+    return this as unknown as NodeJS.ViteReactAutoConfigServer;
   }
 
   setUserConfig(config?: ServerConfig['userConfig']) {

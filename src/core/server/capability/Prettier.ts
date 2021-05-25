@@ -63,6 +63,7 @@ export class PrettierFiles {
 
     return this.canItBePrettier()
       .then(() => Promise.all([...new Set(this.files)].map((f) => this.prettier(f))))
-      .then(() => this.reset());
+      .then(() => this.reset())
+      .catch(() => {});
   }
 }

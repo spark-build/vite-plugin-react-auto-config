@@ -3,19 +3,17 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import reactJsx from 'vite-react-jsx';
 import WindiCSS from 'vite-plugin-windicss';
 
-// import type { VitePluginComponentImport } from 'vite-plugin-style-import';
+import type { VitePluginOptions } from 'vite-plugin-style-import';
 import styleImportPlugin from 'vite-plugin-style-import';
 
 import type { PluginOption } from 'vite';
-
-import type { VitePluginComponentImport } from './temp';
 
 import { reactAutoConfigPluginConfig } from './reactAutoConfig';
 import { Bootstrap } from './Bootstrap';
 
 type Options = {
   // @see https://github.com/anncwb/vite-plugin-style-import/issues/19
-  styleImport?: VitePluginComponentImport;
+  styleImport?: VitePluginOptions;
   reactRefresh?: reactRefreshOptions;
 };
 
