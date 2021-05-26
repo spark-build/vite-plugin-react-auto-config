@@ -38,7 +38,7 @@ import { reactAutoConfig } from '@spark-build/vite-plugin-react-auto-config';
 export default async () =>
   defineConfig({
     // ...
-    plugins: [...reactAutoConfig()],
+    plugins: await reactAutoConfig(), // or [...await reactAutoConfig(), otherPlugin()]
     // ...
   });
 ```
