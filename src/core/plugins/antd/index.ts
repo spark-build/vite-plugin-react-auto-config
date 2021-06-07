@@ -1,3 +1,5 @@
+import { run as transformAntdThemeVariable } from '@spark-build/transform-antd-theme-variable';
+
 import { spliceImportFrom } from '../../util';
 import { getLocaleSpecies } from '../locale/getLocaleSpecies';
 
@@ -61,6 +63,18 @@ export default async function antd(api: NodeJS.ViteReactAutoConfigServer) {
             ...(api.userConfig.antd?.config || {}),
           },
         ),
+      });
+    },
+  });
+
+  api.onGenerateFiles({
+    stage: 10,
+    fn: async () => {
+      // 执行 css variable
+      transformAntdThemeVariable({
+        commandParams: {
+          revert: !api.userConfig.antd?.toCssVariable,
+        },
       });
     },
   });

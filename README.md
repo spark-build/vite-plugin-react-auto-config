@@ -14,6 +14,7 @@
 - [x] 内置基于 [@vitejs/plugin-react-refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh#readme) 实现的 `react-refresh`, 默认启用，可以通过配置进行关闭
 - [x] 内置 [vite-plugin-windicss](https://github.com/windicss/vite-plugin-windicss), 可以通过配置开启，默认关闭
 - [x] 内置基于 [vite-plugin-style-import](https://github.com/anncwb/vite-plugin-style-import) 实现的 `antd` 等库的按需加载, 默认对 `antd`、`@ant-design/icons` 进行按需加载，可以通过配置进行关闭、拓展
+- [x] 内置基于 [@spark-build/transform-antd-theme-variable](https://github.com/spark-build/transform-antd-theme-variable) 实现对 `antd` 的 `less` 主题色变量转换为 `css variable`, 以达到无 `runtime` 的实时动态主题色切换
 - [x] 类似 umi 的运行时配置（未实现全部功能）
 - [x] 内置配置了 `@` 映射到 `project/src` 的路径别名
 - [x] 跟 umi 类似的插件系统
@@ -48,7 +49,6 @@ export default async () =>
 ```typescript
 // config/index.ts  该文件需要自己创建
 import { defineConfig } from '@spark-build/vite-plugin-react-auto-config/lib/core';
-import routes from './routes';
 
 /**
  * 跟 umi 一样的配置方式
@@ -86,7 +86,10 @@ export default defineConfig({
   locale: {
     default: 'zh-CN',
   },
-  antd: {},
+  antd: {
+    // 将主题色等 less 变量转换为 css variable
+    // toCssVariable: true,
+  },
 });
 ```
 

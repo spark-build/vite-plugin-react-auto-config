@@ -32,6 +32,8 @@ export type Config = {
     // 开启紧凑主题
     compact?: boolean;
     config?: ConfigProviderProps;
+    // 将主题色等 less 变量转换为 css variable
+    toCssVariable?: boolean;
   };
   strictMode?: boolean;
 };
@@ -66,6 +68,7 @@ export type ServerConfig = {
 
 export type TapableHookObject<T extends any> = {
   before?: string;
+  // stage 默认是 0，设为 -1 或更少会提前执行，设为 1 或更多会后置执行
   stage?: number;
   fn?: (args: T) => any;
   isSkip?: () => boolean;
