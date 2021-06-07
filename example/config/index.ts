@@ -36,5 +36,7 @@ export default defineConfig({
     default: 'zh-CN',
   },
   windiCSS: true,
-  antd: {},
+  antd: {
+    toCssVariable: true,
+  },
 });

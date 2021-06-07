@@ -5,12 +5,30 @@ import 'virtual:windi.css';
 import { useTranslation } from '@@/index';
 import { Radio } from 'antd';
 import { Form } from 'antd';
+import { useMemo, useState } from 'react';
+
+import { getThemeVariable } from '@spark-build/transform-antd-theme-variable/dist/generateThemeVariable/getThemeVariable';
+
+// @ts-ignore
+import { variables as originVariables } from '../antdThemeVariables';
 
 const GlobalComp = ({ children }: React.PropsWithChildren<{}>) => {
+  const [variables, setVariables] = useState(originVariables);
   const { i18n, t } = useTranslation();
 
+  useMemo(() => {
+    window.addEventListener('primary-color-change', (e) => {
+      setVariables(getThemeVariable((e as CustomEvent<{ primaryColor: string }>).detail));
+    });
+  }, []);
+
   return (
-    <div className="p-24px">
+    <div
+      id="App"
+      data-primary-color={variables['--primary-color']}
+      className="p-24px"
+      style={variables}
+    >
       <div>
         <h1 className="mb-24px font-bold text-lg">{t('global.message')}</h1>
 

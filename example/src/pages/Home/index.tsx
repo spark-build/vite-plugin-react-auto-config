@@ -11,34 +11,48 @@ import {
   Button,
   Select,
   Transfer,
+  Affix,
+  Card,
+  Space,
 } from 'antd';
 import { useState } from 'react';
 import { useNavigate, useTranslation } from '@@/index';
+import { SketchPicker } from 'react-color';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    filters: [
-      {
-        text: 'filter1',
-        value: 'filter1',
-      },
-    ],
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-  },
-];
+const Wrap = ({ children }: React.PropsWithChildren<{}>) => {
+  const [primaryColor, setPrimaryColor] = useState(
+    () => document.getElementById('App')?.dataset?.primaryColor ?? '',
+  );
+
+  return (
+    <div className="flex">
+      <div className="mr-24px">{children}</div>
+
+      <Affix>
+        <Card title="切换主题色">
+          <SketchPicker
+            color={primaryColor}
+            onChange={(v) => {
+              setPrimaryColor(v.hex);
+
+              window.dispatchEvent(
+                new CustomEvent('primary-color-change', { detail: { primaryColor: v.hex } }),
+              );
+            }}
+          />
+        </Card>
+      </Affix>
+    </div>
+  );
+};
 
 /**
  * @ref https://ant.design/components/config-provider-cn/
  */
-export default function Home() {
+const Components = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -103,12 +117,38 @@ export default function Home() {
           <Calendar fullscreen={false} />
         </div>
         <div className="example">
-          <Table dataSource={[]} columns={columns} />
+          <Table
+            dataSource={[]}
+            columns={[
+              {
+                title: 'Name',
+                dataIndex: 'name',
+                filters: [
+                  {
+                    text: 'filter1',
+                    value: 'filter1',
+                  },
+                ],
+              },
+              {
+                title: 'Age',
+                dataIndex: 'age',
+              },
+            ]}
+          />
         </div>
         <Modal title="Locale Modal" visible={visible} onCancel={hideModal}>
           <p>Locale Modal</p>
         </Modal>
       </div>
     </>
+  );
+};
+
+export default function Home() {
+  return (
+    <Wrap>
+      <Components />
+    </Wrap>
   );
 }
