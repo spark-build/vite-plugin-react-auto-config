@@ -24,7 +24,7 @@ export default async function userGlobalRender(api: NodeJS.ViteReactAutoConfigSe
 
   // 判断是否有 app.less;
   if (appStyleFilePath) {
-    const appStyleFilePathSplit = appStyleFilePath.split('/');
+    const appStyleFilePathSplit = appStyleFilePath.replace(/\\/g, '/').split('/');
 
     api.addImportToAppEntryFile({
       stage: -10,
