@@ -27,9 +27,9 @@
     "chalk": "^4.1.1",
     "father-build": "^1.19.6",
     "fs-extra": "^10.0.0",
-    "globby": "^11.0.3",
+    "globby": "^11.0.4",
     "history": "^5.0.0",
-    "i18next": "^20.3.1",
+    "i18next": "^20.3.2",
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
     "ora": "^5.4.1",
@@ -37,7 +37,7 @@
     "react-i18next": "^11.11.0",
     "react-router-dom": "^6.0.0-beta.0",
     "tapable": "^2.2.0",
-    "vite-plugin-style-import": "^0.10.1",
+    "vite-plugin-style-import": "^1.0.0",
     "vite-plugin-windicss": "^1.0.4",
     "vite-react-jsx": "^1.1.1"
   },
@@ -47,8 +47,8 @@
     "@types/loadable__component": "^5.13.3",
     "@types/lodash": "^4.14.170",
     "@types/mustache": "^4.1.1",
-    "typescript": "^4.3.2",
-    "vite": "^2.3.7"
+    "typescript": "^4.3.4",
+    "vite": "^2.3.8"
   },
   "peerDependencies": {
     "@types/react": ">=16.8.0 || >=17.0.0",
