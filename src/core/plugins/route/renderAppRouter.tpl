@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import type { LoadableComponent } from '@loadable/component';
 import type { RouteItem } from '../@types';
 
-import { getRoutes } from './routes';
+import { getRoutes } from './Routes';
 
 type TRouteItem = Omit<RouteItem, 'component'> & {
   component: LoadableComponent<Record<string, unknown>>;
