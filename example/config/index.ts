@@ -39,4 +39,5 @@ export default defineConfig({
   antd: {
     toCssVariable: true,
   },
+  mkcert: true,
 });
