@@ -8,6 +8,9 @@ export const reactAutoConfigPluginConfig = (bootstrap: Bootstrap): Plugin => {
     name: 'plugin-react-auto-config',
 
     config: () => ({
+      server: {
+        https: bootstrap.getServer().userConfig.mkcert,
+      },
       resolve: {
         alias: [
           /**

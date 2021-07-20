@@ -6,15 +6,18 @@ import WindiCSS from 'vite-plugin-windicss';
 import type { VitePluginOptions } from 'vite-plugin-style-import';
 import styleImportPlugin from 'vite-plugin-style-import';
 
+import type { ViteCertificateOptions } from 'vite-plugin-mkcert';
+import VitePluginCertificate from 'vite-plugin-mkcert';
+
 import type { PluginOption } from 'vite';
 
 import { reactAutoConfigPluginConfig } from './reactAutoConfig';
 import { Bootstrap } from './Bootstrap';
 
 type Options = {
-  // @see https://github.com/anncwb/vite-plugin-style-import/issues/19
   styleImport?: VitePluginOptions;
   reactRefresh?: reactRefreshOptions;
+  mkcert?: ViteCertificateOptions;
 };
 
 export const reactAutoConfig = async (options: Options = {}) => {
@@ -53,6 +56,15 @@ export const reactAutoConfig = async (options: Options = {}) => {
           },
           ...(styleImport?.libs || []),
         ],
+      }),
+    );
+  }
+
+  if (userConfig.mkcert) {
+    plugins.push(
+      VitePluginCertificate({
+        source: 'coding',
+        ...options.mkcert,
       }),
     );
   }

@@ -36,6 +36,7 @@ export type Config = {
     toCssVariable?: boolean;
   };
   strictMode?: boolean;
+  mkcert?: boolean;
 };
 
 export type ExportOrImportObjectParams = { source: string; specifier?: string };
