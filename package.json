@@ -38,7 +38,7 @@
     "react-router-dom": "^6.0.0-beta.0",
     "tapable": "^2.2.0",
     "vite-plugin-mkcert": "^1.5.0",
-    "vite-plugin-style-import": "^1.1.0",
+    "vite-plugin-style-import": "1.0.1",
     "vite-plugin-windicss": "^1.2.7",
     "vite-react-jsx": "^1.1.2"
   },
