@@ -4,4 +4,5 @@ export default {
   'route.home': 'home page',
   'route.other': 'other page',
   goTo: 'go to ',
+  switchThemeColor: 'switch theme color',
 };

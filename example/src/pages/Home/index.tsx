@@ -27,12 +27,14 @@ const Wrap = ({ children }: React.PropsWithChildren<{}>) => {
     () => document.getElementById('App')?.dataset?.primaryColor ?? '',
   );
 
+  const { t } = useTranslation();
+
   return (
     <div className="flex">
       <div className="mr-24px">{children}</div>
 
       <Affix>
-        <Card title="切换主题色">
+        <Card title={t('switchThemeColor')}>
           <SketchPicker
             color={primaryColor}
             onChange={(v) => {
