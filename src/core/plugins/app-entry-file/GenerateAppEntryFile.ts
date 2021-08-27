@@ -54,10 +54,7 @@ export class GenerateAppEntryFile {
     const renderFCs = await this.getContainerRenderFunctionNames();
 
     this.addSpaceToFileContent(`
-const renderContainers = [${renderFCs.join(', ')}] as (
-  | typeof renderAntdConfigProvider
-  | React.ReactElement
-)[];
+const renderContainers = [${renderFCs.join(', ')}] as any[];
 
 renderContainers.reduce((prev, current) => {
   if (!isFn(current)) {
