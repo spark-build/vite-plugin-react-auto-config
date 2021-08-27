@@ -7,7 +7,7 @@ import type { RouteItem } from '../@types';
 import { getRoutes } from './Routes';
 
 type TRouteItem = Omit<RouteItem, 'component'> & {
-  component: LoadableComponent<Record<string, unknown>>;
+  component: LoadableComponent<Record<string, unknown>> | (() => React.ReactElement | null);
   routes?: TRouteItem[];
 };
 
