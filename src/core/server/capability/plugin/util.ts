@@ -44,7 +44,7 @@ export const loadPlugins = async () => {
           ...loadFileSetting,
         };
       } catch (e) {
-        throw new Error(`Register ${id} ${path} failed, since ${e.message}`);
+        throw new Error(`Register ${id} ${path} failed, since ${(e as Error).message}`);
       }
     }),
   );
