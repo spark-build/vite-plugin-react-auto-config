@@ -1,6 +1,6 @@
 {
   "name": "@spark-build/vite-plugin-react-auto-config",
-  "version": "0.0.31",
+  "version": "0.1.0",
   "description": "类似 umi 自动生成路由以及相关库集成配置的 vite 插件",
   "author": "atzcl0310@gmail.com",
   "license": "MIT",
