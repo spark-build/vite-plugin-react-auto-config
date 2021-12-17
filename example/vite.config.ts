@@ -6,6 +6,9 @@ export default async () => {
   return defineConfig({
     server: {
       port: 6546,
+      https: {
+        sessionTimeout: 1000,
+      },
     },
     plugins: (await reactAutoConfig()) as PluginOption[],
   });

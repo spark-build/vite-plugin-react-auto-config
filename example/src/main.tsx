@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { isFn } from '@spark-build/web-utils';
 import { RenderAntdConfigProvider } from '@@/antd';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { RenderAppRouter } from '@@/routes/Router';
+import { RenderAppRouter } from '@@/router/RenderAppRouter';
 import { rootContainer } from '@/app';
 
 
@@ -17,9 +17,9 @@ function renderRouter(children?: React.ReactElement) {
   );
 }
 
-    function renderRootContainer(children?: React.ReactElement) {
-      return rootContainer(children)
-    }
+function renderRootContainer(children?: React.ReactElement) {
+  return rootContainer(children)
+}
 
 function renderAntdConfigProvider(children?: React.ReactElement) {
   return <RenderAntdConfigProvider>{children}</RenderAntdConfigProvider>;
@@ -30,10 +30,7 @@ function ReactDOMContainer(ele: React.ReactElement) {
 }
 
 
-const renderContainers = [renderRouter, renderRootContainer, renderAntdConfigProvider, ReactDOMContainer] as (
-  | typeof renderAntdConfigProvider
-  | React.ReactElement
-)[];
+const renderContainers = [renderRouter, renderRootContainer, renderAntdConfigProvider, ReactDOMContainer] as any[];
 
 renderContainers.reduce((prev, current) => {
   if (!isFn(current)) {

@@ -2,6 +2,8 @@
 import 'virtual:windi.css';
 // import 'virtual:windi-devtools';
 
+import './permission';
+
 import { useTranslation } from '@@/index';
 import { Radio } from 'antd';
 import { Form } from 'antd';

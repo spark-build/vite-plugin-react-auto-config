@@ -1,4 +1,4 @@
-import { defineConfig } from '@spark-build/vite-plugin-react-auto-config/lib/core';
+import { defineConfig } from '@spark-build/vite-plugin-react-auto-config';
 
 /**
  * 跟 umi 一样的配置方式
@@ -13,11 +13,37 @@ export default defineConfig({
       routes: [
         {
           path: '/',
+          name: 'home',
           component: '@/pages/Home',
         },
         {
-          path: '/other',
+          path: 'other',
           component: '@/pages/Other',
+        },
+        {
+          path: 'messages',
+          component: '@/pages/Message',
+          routes: [
+            {
+              path: ':id',
+              name: 'messageDetail',
+              component: '@/pages/Message/Detail',
+            },
+          ],
+        },
+        {
+          path: 'about',
+          component: '@/pages/About/Layout',
+          routes: [
+            {
+              index: true,
+              component: '@/pages/About/index',
+            },
+            {
+              path: 'detail',
+              component: '@/pages/About/Detail',
+            },
+          ],
         },
       ],
     },
@@ -30,7 +56,6 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/pages/Loading',
     delay: 60,
-    webpackPreload: true,
   },
   locale: {
     default: 'zh-CN',

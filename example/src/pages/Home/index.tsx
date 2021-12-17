@@ -16,7 +16,8 @@ import {
   Space,
 } from 'antd';
 import { useState } from 'react';
-import { useNavigate, useTranslation } from '@@/index';
+import { useTranslation } from '@@/index';
+import { RouterHelper } from '@@/router';
 import { SketchPicker } from 'react-color';
 
 const { Option } = Select;
@@ -55,7 +56,6 @@ const Wrap = ({ children }: React.PropsWithChildren<{}>) => {
  * @ref https://ant.design/components/config-provider-cn/
  */
 const Components = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [visible, setVisible] = useState(false);
@@ -84,10 +84,18 @@ const Components = () => {
 
   return (
     <>
-      <Button className="mb-24px" onClick={() => navigate('/other')}>
-        {t('goTo')}
-        {t('route.other')}
-      </Button>
+      <Space className="mb-24px">
+        <Button onClick={() => RouterHelper.push('/messages')}>{t('goTo')} Message Page</Button>
+
+        <Button onClick={() => RouterHelper.push('/other')}>
+          {t('goTo')}
+          {t('route.other')}
+        </Button>
+
+        <Button onClick={() => RouterHelper.push({ path: '/about', query: { name: 'me the' } })}>
+          {t('goTo')} About Page
+        </Button>
+      </Space>
 
       <div className="locale-components">
         <div className="example">
