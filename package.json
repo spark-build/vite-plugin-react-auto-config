@@ -24,6 +24,8 @@
     "build": "yarn father-build build",
     "build:debug": "yarn father-build build && node scripts/syncDistToExample.js",
     "publishPkg": "yarn build && npm version patch && npm publish",
+    "publishPkg:minor": "yarn build && npm version minor && npm publish",
+    "publishPkg:major": "yarn build && npm version major && npm publish",
     "release": "yarn build && yarn release-it"
   },
   "dependencies": {
