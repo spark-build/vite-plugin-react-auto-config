@@ -45,9 +45,9 @@ export default async function userGlobalRender(api: NodeJS.ViteReactAutoConfigSe
       api.addContainerRenderToAppEntryFile({
         stage: 9,
         fn: () => `
-    function renderRootContainer(children?: React.ReactElement) {
-      return rootContainer(children)
-    }`,
+function renderRootContainer(children?: React.ReactElement) {
+  return rootContainer(children)
+}`,
       });
     }
   }

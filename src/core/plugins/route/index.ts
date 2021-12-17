@@ -6,6 +6,7 @@ import {
   generateRenderAppRouter,
   filePath as generateRenderAppRouterFilePath,
 } from './renderAppRouter';
+import { generateRouterHelper } from './generateRouterHelper';
 
 const dTsFilePath = '@types/index.d.ts';
 
@@ -40,6 +41,8 @@ function renderRouter(children?: React.ReactElement) {
     await generateRoutes(api);
 
     await generateRenderAppRouter(api);
+
+    await generateRouterHelper(api);
 
     await api.generateFile.copyFile(
       join(__dirname, '../../typings/common.d.ts'),

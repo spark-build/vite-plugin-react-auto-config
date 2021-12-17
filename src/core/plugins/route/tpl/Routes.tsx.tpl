@@ -2,13 +2,13 @@
 import LoadingComponent from '{{{ loadingComponent }}}';
 {{ /loadingComponent }}
 
-{{ #importNameTemplate }}
-{{{ importNameTemplate }}}
-{{ /importNameTemplate }}
-
 {{ #loadingComponent }}
 import dynamic from '@loadable/component';
 {{ /loadingComponent }}
+
+{{ #importNameTemplate }}
+{{{ importNameTemplate }}}
+{{ /importNameTemplate }}
 
 export function getRoutes() {
   return {{{ routes }}};
