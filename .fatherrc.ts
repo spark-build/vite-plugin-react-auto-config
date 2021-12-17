@@ -1,8 +1,8 @@
 export default {
   cjs: 'babel',
-  // esm: { type: 'babel', importLibToEs: true },
+  esm: 'babel',
   target: 'node',
-  nodeVersion: 14,
+  nodeVersion: 16,
   preCommit: {
     eslint: true,
     prettier: true,
