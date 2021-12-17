@@ -3,6 +3,7 @@
 **/node_modules
 
 /dist
+/es
 .vscode
 
 # misc
@@ -31,3 +32,4 @@ screenshot
 dist
 dist-ssr
 *.local
+.npmrc

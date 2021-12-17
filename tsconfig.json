@@ -3,7 +3,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "target": "es2020",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
