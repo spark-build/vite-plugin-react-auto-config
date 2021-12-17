@@ -1,6 +1,4 @@
-import type { Options as reactRefreshOptions } from '@vitejs/plugin-react-refresh';
-import reactRefresh from '@vitejs/plugin-react-refresh';
-import reactJsx from 'vite-react-jsx';
+import react, { Options as ReactOptions } from '@vitejs/plugin-react'
 import WindiCSS from 'vite-plugin-windicss';
 
 import type { VitePluginOptions } from 'vite-plugin-style-import';
@@ -16,7 +14,7 @@ import { Bootstrap } from './Bootstrap';
 
 type Options = {
   styleImport?: VitePluginOptions;
-  reactRefresh?: reactRefreshOptions;
+  react?: ReactOptions;
   mkcert?: ViteCertificateOptions;
 };
 
@@ -28,14 +26,14 @@ export const reactAutoConfig = async (options: Options = {}) => {
 
   const { userConfig } = bootstrap.getServer();
 
-  const plugins = [reactJsx(), reactAutoConfigPluginConfig(bootstrap)] as (
+  const plugins = [
+    // todo: 待替换成 https://github.com/iheyunfei/vite-on-swc
+    react(options.react),
+    reactAutoConfigPluginConfig(bootstrap)
+  ] as (
     | PluginOption
     | PluginOption[]
   )[];
-
-  if (userConfig.fastRefresh !== false) {
-    plugins.push(reactRefresh(options.reactRefresh));
-  }
 
   if (userConfig.antd) {
     const { styleImport } = options;

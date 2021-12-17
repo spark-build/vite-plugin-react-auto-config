@@ -12,7 +12,6 @@ export type Config = {
      */
     loading?: string;
     delay?: number;
-    webpackPreload?: boolean;
   };
   // https://umijs.org/zh-CN/plugins/plugin-locale#umijsplugin-locale
   locale?: {

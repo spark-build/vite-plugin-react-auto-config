@@ -6,7 +6,7 @@ const PromiseWrapper = (cmdType: keyof typeof childProcess) => (
   isConsoleLog = true,
 ) =>
   new Promise((resolve, reject) => {
-    const result = childProcess[cmdType](options) as childProcess.ChildProcessByStdio<
+    const result = childProcess[cmdType as 'spawn'](options) as childProcess.ChildProcessByStdio<
       Writable,
       Readable,
       Readable

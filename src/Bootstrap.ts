@@ -1,10 +1,9 @@
-/* eslint-disable import/no-dynamic-require */
 import assert from 'assert';
 import { join } from 'path';
 
 import * as fs from 'fs-extra';
 
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import * as esbuild from 'esbuild';
 
 import { Service } from './core';

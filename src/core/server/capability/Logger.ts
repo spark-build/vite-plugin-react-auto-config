@@ -1,4 +1,4 @@
-import ora from 'ora';
+import ora, { Ora } from 'ora';
 import type { ForegroundColor } from 'chalk';
 import chalk from 'chalk';
 
@@ -21,7 +21,7 @@ function outputLogText(opts = {} as Partial<{ type: LogType; color: typeof Foreg
 }
 
 class Spinner {
-  private spinnerInstance: ora.Ora | undefined;
+  private spinnerInstance: Ora | undefined;
 
   init(text = '即将开始启动自动生成业务配置代码，请稍等~\n') {
     this.spinnerInstance = ora(outputLogText()(text));
