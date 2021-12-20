@@ -19,8 +19,6 @@ const GoToHome = () => {
 };
 
 export default function BasicLayout() {
-  console.log(111);
-
   return (
     <>
       <GoToHome />

@@ -45,11 +45,11 @@ export default defineConfig({
             },
           ],
         },
+        {
+          path: '*',
+          component: '@/pages/NotFound',
+        },
       ],
-    },
-    {
-      path: '*',
-      component: '@/pages/NotFound',
     },
   ],
   // strictMode: true,
